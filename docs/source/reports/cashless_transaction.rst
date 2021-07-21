@@ -112,6 +112,7 @@ Retorno
 * **eft_authorizer**: detalhes do adquirente de TEF das transações cashless.
 * **eft_card_brand**: detalhes do cartão utilizado nas transações cashless.
 * **eft_card_type**: detalhes do tipo de cartão utilizado nas transações cashless.
+* **masked_card_number**: O número mascarado do cartão.
 
 Segue um exemplo de retorno de consulta:
 
@@ -165,7 +166,8 @@ Segue um exemplo de retorno de consulta:
         },
         "eft_card_type": {
           "name": "Crédito"
-        }
+        },
+        masked_card_number: "123456******1111"
       },
       {
         "id":123456,
