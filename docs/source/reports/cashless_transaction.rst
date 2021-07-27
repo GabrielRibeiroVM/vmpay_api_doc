@@ -167,7 +167,7 @@ Segue um exemplo de retorno de consulta:
         "eft_card_type": {
           "name": "Crédito"
         },
-        masked_card_number: "123456******1111"
+        "masked_card_number": "123456******1111"
       },
       {
         "id":123456,
