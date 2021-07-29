@@ -60,6 +60,7 @@ Resources disponíveis
    reports/invoice
    reports/pick_list
    reports/cashless_transaction
+   reports/cashless_facts
    reports/vend
    reports/visit
 
