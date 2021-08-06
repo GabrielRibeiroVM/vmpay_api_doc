@@ -64,6 +64,10 @@ Este serviço suporta `paginação <../overview.html#paginacao>`_.
   * Tal produto pode ser composto (combo ou bebidas quentes) ou não (produtos vendidos por unidade).
   * `Good <https://en.wikipedia.org/wiki/Good_%28economics%29>`_ neste caso se traduz como `bem <https://pt.wikipedia.org/wiki/Bem_%28economia%29>`_.
 
+* **vend_id_greater_than**: o id da venda.
+
+  * Se passado, a consulta irá retorna somente as vendas com o id maior que o informado.
+
 Retorno
 -------
 
