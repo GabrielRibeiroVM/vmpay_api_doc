@@ -1760,3 +1760,42 @@ status  descrição                                    response body
 ======  ===========================================  =========================================
 404     máquina/instalação/auditoria não encontrada  { "status": "404", "error": "Not Found" }
 ======  ===========================================  =========================================
+
+Desprocessar
+============
+
+Desprocessa auditoria. Pode ser utilizado em auditorias cujos valores vieram
+errados. Desprocessa vendas, valores em dinheiro/moeda e coletas.
+
+::
+
+  DELETE /api/v1/machines/[machine_id]/installations/[installation_id]/audits/[id]
+
+Parâmetros de URL:
+------------------
+
+===============  ================  ===========
+parâmetro        descrição         obrigatório
+===============  ================  ===========
+machine_id       id da máquina     sim
+installation_id  id da instalação  sim
+id               id da auditoria   sim
+===============  ================  ===========
+
+Retorno
+-------
+
+======  =========================  =============
+status  descrição                  response body
+======  =========================  =============
+204     Desprocessada com sucesso  (vazio)
+======  =========================  =============
+
+Erros
+-----
+
+======  ===========================================  =========================================
+status  descrição                                    response body
+======  ===========================================  =========================================
+404     máquina/instalação/auditoria não encontrada  { "status": "404", "error": "Not Found" }
+======  ===========================================  =========================================
