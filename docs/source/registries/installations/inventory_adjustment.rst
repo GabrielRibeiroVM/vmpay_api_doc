@@ -21,6 +21,29 @@ machine_id       id da máquina     sim
 installation_id  id da instalação  sim
 ===============  ================  ===========
 
+Filtros
+-------
+
+Os parâmetros abaixo podem ser passados como uma
+`query string <https://en.wikipedia.org/wiki/Query_string>`_. Mais de um filtro
+pode ser passado na mesma consulta.
+
+* **start_date**: a data de início dos ajustes.
+
+  * Se passado, a consulta retorna somente os ajustes ocorridos a partir desta data e hora, inclusive.
+  * Deve-se passar a data e também a **hora**; se não passada, considerada-se 00:00 `UTC <https://en.wikipedia.org/wiki/Coordinated_Universal_Time>`_.
+  * Um formato possível é *dd/mm/yyyy hh:mi:ss*. Nesse caso a data e hora devem estar em `UTC <https://en.wikipedia.org/wiki/Coordinated_Universal_Time>`_.
+  * Este campo também suporta o formato `ISO 8601 <https://en.wikipedia.org/wiki/ISO_8601>`_.
+  * Caso o formato da data seja inválido, é retornado erro com o código HTTP 400 (*bad request*).
+
+* **end_date**: a data final dos ajustes.
+
+  * Se passado, a consulta retorna somente os ajustes ocorridos até esta data e hora, inclusive.
+  * Deve-se passar a data e também a **hora**; se não passada, considerada-se 00:00 `UTC <https://en.wikipedia.org/wiki/Coordinated_Universal_Time>`_.
+  * Um formato possível é *dd/mm/yyyy hh:mi:ss*. Nesse caso a data e hora devem estar em `UTC <https://en.wikipedia.org/wiki/Coordinated_Universal_Time>`_.
+  * Este campo também suporta o formato `ISO 8601 <https://en.wikipedia.org/wiki/ISO_8601>`_.
+  * Caso o formato da data seja inválido, é retornado erro com o código HTTP 400 (*bad request*).
+
 Retorno
 -------
 
