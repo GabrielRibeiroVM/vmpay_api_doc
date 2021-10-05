@@ -68,6 +68,11 @@ Este serviço suporta `paginação <../overview.html#paginacao>`_.
 
   * Se passado, a consulta irá retorna somente as vendas com o id maior que o informado.
 
+* **audit_id**: a auditoria a que pertencem as vendas.
+
+  * Se passado, a consulta retorna somente vendas desta auditoria.
+  * A auditoria das vendas passou a ser preenchida em 09/10/2021. Vendas anteriores a esta data não possuem informação de auditoria.
+
 Retorno
 -------
 
@@ -83,6 +88,10 @@ Retorno
 * **good_id**: o id do produto (composto ou não) vendido.
 
   * * `Good <https://en.wikipedia.org/wiki/Good_%28economics%29>`_ neste caso se traduz como `bem <https://pt.wikipedia.org/wiki/Bem_%28economia%29>`_.
+
+* **audit_id**: o id da auditoria da venda.
+
+  * * A auditoria das vendas passou a ser preenchida em 09/10/2021. Vendas anteriores a esta data não possuem informação de auditoria.
 
 * **coil**: o número do item de planograma em que ocorreu a venda (canaleta, seleção ou combo).
 * **quantity**: a quantidade vendida do item.
