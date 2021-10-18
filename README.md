@@ -12,19 +12,20 @@ hospedada no [Read The Docs](https://readthedocs.org/).
 
 Há uma [documentação online](http://www.sphinx-doc.org/en/stable/install.html) de como instalar o Sphinx. Na [documentação completa do Read The Docs](http://docs.readthedocs.org/en/latest/) também há muita coisa.
 
-TL;DR: se você está no Linux, provavelmente você já tem o Python instalado. As últimas distribuições do Python já vem com o [pip](https://pip.pypa.io/en/stable/):
+Se você está no Linux Debian/Ubuntu pode instalar os pacotes necessários com os seguintes comandos:
 
-  ```pip -h```
+```
+sudo apt update
 
-Se não, basta instalar. Por exemplo:
+sudo apt install python3-sphinx
 
-  ```sudo apt-get install python-pip```
+sudo apt install python3-pip
 
-Instalado o pip, basta rodar:
+sudo apt install python3-stemmer
 
-  ```sudo -H pip install sphinx sphinx-autobuild sphinx_rtd_theme```
+sudo -H pip install sphinx_rtd_theme
+```
 
-A versão do Sphinx utilizada neste projeto foi a 1.3.3 com o Python 2.7.10.
 
 ### Integrando este projeto com o Read The Docs
 
