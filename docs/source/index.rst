@@ -8,6 +8,7 @@ VMpay API
 
    intro
    overview
+   faq
 
 Resources disponíveis
 =====================
