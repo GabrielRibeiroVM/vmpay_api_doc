@@ -145,7 +145,12 @@ Segue um exemplo de retorno de consulta:
         "eft_authorizer_id": 3,
         "eft_card_brand_id": 4,
         "eft_card_type_id": 5,
-        "number_of_payments": 1
+        "number_of_payments": 1,
+        "kind": "external_authorizer_vmlink",
+        "payment_authorizer": {
+          "id": 2,
+          "name": "PicPay"
+        }
       }
     },
     {
