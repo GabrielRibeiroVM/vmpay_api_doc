@@ -16,8 +16,6 @@ Os parâmetros abaixo podem ser passados como uma
 `query string <https://en.wikipedia.org/wiki/Query_string>`_. Datas devem ser
 passadas no formato `ISO 8601 <https://en.wikipedia.org/wiki/ISO_8601>`_.
 
-Este serviço suporta `paginação <../overview.html#paginacao>`_.
-
 * **asset_number**: filtra máquinas pelo número de patrimônio.
 
 Retorno
