@@ -55,6 +55,7 @@ Resources disponíveis
    :maxdepth: 1
    :caption: Relatórios
 
+   reports/door_accesses
    reports/alert
    reports/device_config
    reports/session
