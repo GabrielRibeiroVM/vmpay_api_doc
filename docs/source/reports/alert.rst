@@ -38,11 +38,17 @@ Este serviço suporta `paginação <../overview.html#paginacao>`_.
 
   * Se passado, a consulta retorna somente alertas ocorridos nesta instalação.
 
+* **alert_id_greater_than**: o id do alerta.
+
+  * Se passado, a consulta irá retornar somente os alertas com o id maior que o informado.
+
+
 Retorno
 -------
 
 É retornado um `JSON <https://en.wikipedia.org/wiki/JSON>`_ contendo um array com objetos que correspondem aos alertas. O array é ordenado por data e hora de alerta, da mais recente para a mais antiga. O campos de cada alerta são os seguintes:
 
+* **id**: o id do alerta.
 * **occurred_at**: a data e hora do alerta, no formato `ISO 8601 <https://en.wikipedia.org/wiki/ISO_8601>`_.
 * **client_id**: o id do cliente do alerta.
 * **location_id**: o id do local do alerta.
@@ -59,40 +65,42 @@ Segue um exemplo de retorno de consulta:
 
     [
       {
+        "id": 1,
         "occurred_at":"2016-02-11T12:34:56.000-02:00",
-        "client_id":1,
-        "location_id":2,
-        "machine_id":3,
-        "installation_id":4,
+        "client_id": 1,
+        "location_id": 2,
+        "machine_id": 3,
+        "installation_id": 4,
         "description":"A comunicação falhou",
         "client": {
           "name":"Client X"
         },
         "location": {
-          "client_id":1,
+          "client_id": 1,
           "name":"Location X"
         },
         "machine": {
-          "machine_model_id":9,
+          "machine_model_id": 9,
           "asset_number":"123"
         }
       },
       {
+        "id": 2,
         "occurred_at":"2016-02-11T12:45:12.000-02:00",
-        "client_id":1,
-        "location_id":2,
-        "machine_id":3,
-        "installation_id":4,
+        "client_id": 1,
+        "location_id": 2,
+        "machine_id": 3,
+        "installation_id": 4,
         "description":"A comunicação foi restabelecida",
         "client": {
           "name":"Client X"
         },
         "location": {
-          "client_id":1,
+          "client_id": 1,
           "name":"Location X"
         },
         "machine": {
-          "machine_model_id":9,
+          "machine_model_id": 9,
           "asset_number":"123"
         }
       }
