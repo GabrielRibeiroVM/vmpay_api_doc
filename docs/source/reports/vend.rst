@@ -66,7 +66,7 @@ Este serviço suporta `paginação <../overview.html#paginacao>`_.
 
 * **vend_id_greater_than**: o id da venda.
 
-  * Se passado, a consulta irá retorna somente as vendas com o id maior que o informado.
+  * Se passado, a consulta irá retornar somente as vendas com o id maior que o informado.
 
 * **audit_id**: a auditoria a que pertencem as vendas.
 
