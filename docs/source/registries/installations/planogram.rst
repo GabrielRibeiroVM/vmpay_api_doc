@@ -320,7 +320,7 @@ Obrigatórios
 
 * *planogram*
 
-  * *items_attributes*: um array contendo os items do planograma.
+  * *items_attributes*: um array contendo os items do planograma (deve conter no máximo 2000 items, caso contrário o servidor poderá recusar a requisição).
 
     * Os items podem ser de 4 tipos: canaletas, combos, canisters e seleções.
     * Canaletas:
@@ -661,7 +661,7 @@ Obrigatórios
 
 * *planogram*
 
-  * *items_attributes*: um array contendo os items do planograma.
+  * *items_attributes*: um array contendo os items do planograma (deve conter no máximo 2000 items, caso contrário o servidor poderá recusar a requisição).
 
     * Os items podem ser de 4 tipos: canaletas, combos, canisters e seleções.
     * Canaletas:
