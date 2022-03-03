@@ -34,6 +34,7 @@ Exemplo::
       "external_id": null,
       "weight": null,
       "vendible_balance": -6.0,
+      "tags": ["tag1", "tag2"],
       "cost_price": 1.23,
       "additional_barcodes": [],
       "ncm_code": "21069090",
@@ -64,6 +65,7 @@ Exemplo::
       "external_id": null,
       "weight": null,
       "vendible_balance": -6.0,
+      "tags": ["tag2", "tag3"],
       "cost_price": null,
       "additional_barcodes": [
         { "id": 123, "value": "10191817" },
@@ -85,6 +87,7 @@ Exemplo::
       "external_id": null,
       "weight": null,
       "vendible_balance": -6.0,
+      "tags": ["tag1", "tag3"],
       "cost_price": null,
       "additional_barcodes": [],
       "packing": {
@@ -143,6 +146,7 @@ Exemplo::
     "external_id": null,
     "weight": null,
     "vendible_balance": -6.0,
+    "tags": ["tag1", "tag2"],
     "cost_price": 1.23,
     "additional_barcodes": [],
     "ncm_code": "21069090",
@@ -187,6 +191,7 @@ Request::
       "cest_code": "1234567",
       "tax_operation_id": 78,
       "cost_price": 1.23,
+      "tags": ["tag1", "tag2"],
       "additional_barcodes_attributes": [
         { "value": "10191817" },
         { "value": "16151413" }
@@ -219,6 +224,7 @@ Opcionais
   * *external_id*: identificador externo do produto.
   * *weight*: peso do produto (em gramas)
   * *cost_price*: preço de custo
+  * *tags*: array com tags.
   * *additional_barcodes_attributes*: Array com códigos de barras adicionais.
 
     * *value*: o código de barras.
@@ -256,6 +262,7 @@ Exemplo::
     "barcode": "1234567891",
     "external_id": "123qwe",
     "weight": 123,
+    "tags": ["tag1", "tag2"],
     "ncm_code": "21069090",
     "cest_code": "1234567",
     "tax_operation": {
@@ -332,6 +339,7 @@ Caso se deseje remover um *additional_barcode*, deve-se adicionar o atributo
   {
     "product": {
       "name": "Schweppes Guaraná",
+      "tags": ["tag1", "tag2"],
       "additional_barcodes_attributes": [
         {
           "id": 123,
@@ -346,6 +354,7 @@ O mesmo vale para o *packing*::
   {
     "product": {
       "name": "Schweppes Guaraná",
+      "tags": ["tag1", "tag2"],
       "good_packing_attributes": {
         "id": 15,
         "_destroy": true
@@ -376,6 +385,7 @@ Exemplo::
     "barcode": "1234567891",
     "external_id": null,
     "weight": null,
+    "tags": ["tag1", "tag2"],
     "ncm_code": "21069090",
     "cest_code": "1234567",
     "tax_operation": {

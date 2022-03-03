@@ -137,6 +137,10 @@ Este serviço suporta `paginação <../overview.html#paginacao>`_.
 
   * Se passado, a consulta retorna somente transações cashless desse tipo de produto.
 
+* **tags**: as tags associadas aos produtos ou máquinas das transações cashless.
+
+  * Se passado, a consulta retorna somente transações cashless cujas máquinas ou produtos contém as tags passadas.
+
 Retorno
 -------
 

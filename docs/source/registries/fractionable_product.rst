@@ -33,6 +33,7 @@ Exemplo::
       "barcode": "20000001",
       "external_id": null,
       "weight": null,
+      "tags": ["tag1", "tag2"],
       "cost_price": 1.23,
       "additional_barcodes": [],
       "unit": {
@@ -61,6 +62,7 @@ Exemplo::
       "barcode": "2000100",
       "external_id": null,
       "weight": null,
+      "tags": ["tag2", "tag3"],
       "cost_price": null,
       "additional_barcodes": [
         { "id": 123, "value": "2000101" },
@@ -86,6 +88,7 @@ Exemplo::
       "barcode": 20000003,
       "external_id": null,
       "weight": null,
+      "tags": ["tag1", "tag3"],
       "cost_price": null,
       "additional_barcodes": [],
       "unit": {
@@ -144,6 +147,7 @@ Exemplo::
     "external_id": null,
     "weight": null,
     "cost_price": 1.23,
+    "tags": ["tag1", "tag2"],
     "additional_barcodes": [],
     "unit": {
       "id": 2,
@@ -193,6 +197,7 @@ Request::
       "cest_code": "1234567",
       "tax_operation_id": 78,
       "cost_price": 1.23,
+      "tags": ["tag1", "tag2"],
       "additional_barcodes_attributes": [
         { "value": "20000006" },
         { "value": "20000007" }
@@ -222,6 +227,7 @@ Opcionais
   * *barcode*: código de barras do produto, a ser utilizado no micro market.
   * *external_id*: identificador externo do produto.
   * *weight*: peso do produto (em gramas)
+  * *tags*: array com tags.
   * *cost_price*: preço de custo
   * *additional_barcodes_attributes*: Array com códigos de barras adicionais.
 
@@ -256,6 +262,7 @@ Exemplo::
     "barcode": "20000005",
     "external_id": "123qwe",
     "weight": 123,
+    "tags": ["tag1", "tag2"],
     "ncm_code": "21069090",
     "cest_code": "1234567",
     "tax_operation": {
@@ -339,6 +346,7 @@ Caso se deseje remover um *additional_barcode*, deve-se adicionar o atributo
   {
     "product": {
       "name": "Carne moída",
+      "tags": ["tag1", "tag2"],
       "additional_barcodes_attributes": [
         {
           "id": 123,
@@ -371,6 +379,7 @@ Exemplo::
     "barcode": "20000005",
     "external_id": "123qwe",
     "weight": 123,
+    "tags": ["tag1", "tag2"],
     "ncm_code": "21069090",
     "cest_code": "1234567",
     "tax_operation": {

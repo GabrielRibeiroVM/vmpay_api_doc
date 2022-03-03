@@ -17,6 +17,7 @@ Os parâmetros abaixo podem ser passados como uma
 passadas no formato `ISO 8601 <https://en.wikipedia.org/wiki/ISO_8601>`_.
 
 * **asset_number**: filtra máquinas pelo número de patrimônio.
+* **tags**: filtra máquinas pelas tags passadas em um array.
 
 Retorno
 -------
@@ -38,6 +39,7 @@ Exemplo:
       "asset_number": "M010 - 0037",
       "external_id": null,
       "distribution_center_id": 47,
+      "tags": ["tag1", "tag2"],
       "installation": {
         "id": 1106,
         "location_id": 1391,
@@ -54,7 +56,8 @@ Exemplo:
       "machine_model_id": 75,
       "asset_number": "M003 - 0009",
       "external_id": null,
-      "distribution_center_id": 47
+      "distribution_center_id": 47,
+      "tags": ["tag1", "tag3"]
     }
   ]
 
@@ -93,6 +96,7 @@ Exemplo:
     "asset_number": "M010 - 0037",
     "external_id": null,
     "distribution_center_id": 47,
+    "tags": ["tag1", "tag2"],
     "installation": {
       "id": 1106,
       "location_id": 1391,
@@ -127,7 +131,8 @@ Request::
     "machine": {
       "asset_number": "01234",
       "machine_model_id": "12",
-      "external_id": 'qwe123'
+      "external_id": "qwe123",
+      "tags": ["tag1", "tag2"]
     }
   }
 
@@ -148,6 +153,7 @@ Opcionais
 * *machine*
 
   * *external_id*: identificador externo da máquina.
+  * *tags*: array com tags.
 
 Retorno
 -------
@@ -164,7 +170,8 @@ Exemplo::
     "id": 614,
     "machine_model_id": 12,
     "asset_number": "01234",
-    "external_id": 'qwe123'
+    "external_id": "qwe123",
+    "tags": ["tag1", "tag2"]
   }
 
 Erros
@@ -211,7 +218,8 @@ Request::
 
   {
     "machine": {
-      "asset_number": "998877"
+      "asset_number": "998877",
+      "tags": ["tag1", "tag2"]
     }
   }
 
@@ -237,6 +245,7 @@ Exemplo::
     "asset_number": "998877",
     "external_id": null,
     "distribution_center_id": 47,
+    "tags": ["tag1", "tag2"],
     "installation": {
       "id": 1119,
       "location_id": 185,

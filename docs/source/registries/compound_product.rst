@@ -29,7 +29,8 @@ Exemplo::
       "category_id": 236,
       "name": "Nescau + Leite",
       "external_id": "qwe111",
-      "cost_price": 1.23
+      "cost_price": 1.23,
+      "tags": ["tag1", "tag2"]
     },
     {
       "id": 3046,
@@ -39,7 +40,8 @@ Exemplo::
       "category_id": 471,
       "name": "Capuccino brasileiro",
       "external_id": "qwe222",
-      "cost_price": null
+      "cost_price": null,
+      "tags": ["tag1", "tag3"]
     }
   ]
 
@@ -81,7 +83,8 @@ Exemplo:
     "category_id": 471,
     "name": "Capuccino brasileiro",
     "external_id": "qwe222",
-    "cost_price": 1.23
+    "cost_price": 1.23,
+    "tags": ["tag1", "tag2"]
   }
 
 Erros
@@ -108,7 +111,8 @@ Request::
       "category_id": 12,
       "name": "Coca + Ruffles",
       "external_id": "qwe123",
-      "cost_price": 1.23
+      "cost_price": 1.23,
+      "tags": ["tag1", "tag2"]
     }
   }
 
@@ -134,6 +138,7 @@ Opcionais
 
   * *cost_price*: preço de custo
   * *external_id*: identificador externo do produto composto.
+  * *tags*: array com tags.
 
 Retorno
 -------
@@ -154,7 +159,8 @@ Exemplo::
     "category_id": 12,
     "name": "Coca + Ruffles",
     "external_id": "qwe123",
-    "cost_price": 1.23
+    "cost_price": 1.23,
+    "tags": ["tag1", "tag2"]
   }
 
 Erros
@@ -199,7 +205,8 @@ Request::
 
     {
       "compound_product": {
-        "name": "Novo nome"
+        "name": "Novo nome",
+        "tags": ["tag1", "tag2"]
       }
     }
 
@@ -229,7 +236,8 @@ Exemplo::
     "category_id": 12,
     "name": "Novo produto composto",
     "external_id": null,
-    "cost_price": 1.23
+    "cost_price": 1.23,
+    "tags": ["tag1", "tag2"]
   }
 
 Erros
