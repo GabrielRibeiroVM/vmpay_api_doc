@@ -1185,6 +1185,7 @@ Resources aninhadas
    :maxdepth: 1
 
    installations/pick_list
+   installations/current_planogram
    installations/planogram
    installations/audit
    installations/remote_command
