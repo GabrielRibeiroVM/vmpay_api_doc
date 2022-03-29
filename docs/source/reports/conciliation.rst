@@ -90,6 +90,9 @@ Retorno
 * **discount_value**: o valor do desconto da transação cashless.
 * **request_number**: o número da requisição da transação cashless.
 * **uuid**: o número do pedido caso exista.
+* **client**: detalhes do cliente da transação cashless.
+* **location**: detalhes do local da transação cashless.
+* **machine**: detalhes da máquina da transação cashless.
 * **eft_provider**: detalhes do provedor de TEF da transação cashless.
 * **eft_authorizer**: detalhes do adquirente de TEF da transação cashless.
 * **eft_card_brand**: detalhes do cartão utilizado na transação cashless.
@@ -109,6 +112,18 @@ Segue um exemplo de retorno de consulta:
       "discount_value": null,
       "request_number": "000237",
       "uuid": "f917b792-29e3-4378-b28f-d167fb19fbb0",
+      "client": {
+        "id": 2854,
+        "name": "Cliente virtual"
+      },
+      "location": {
+        "id": 3515,
+        "name": "Cliente virtual"
+      },
+      "machine": {
+        "id": 3184,
+        "asset_number": "1072"
+      },
       "eft_provider": {
         "id": 2,
         "name": "SiTef"
@@ -135,6 +150,18 @@ Segue um exemplo de retorno de consulta:
       "discount_value": null,
       "request_number": "000240",
       "uuid": null,
+      "client": {
+        "id": 2854,
+        "name": "Cliente virtual"
+      },
+      "location": {
+        "id": 3515,
+        "name": "Cliente virtual"
+      },
+      "machine": {
+        "id": 3184,
+        "asset_number": "1072"
+      },
       "eft_provider": {
         "id": 2,
         "name": "SiTef"
