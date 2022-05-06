@@ -61,6 +61,7 @@ Resources disponíveis
    reports/conciliation
    reports/invoice
    reports/pick_list
+   reports/installation_stock_balances
    reports/cashless_transaction
    reports/cashless_facts
    reports/vend
