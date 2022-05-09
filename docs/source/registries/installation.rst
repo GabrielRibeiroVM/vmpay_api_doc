@@ -49,6 +49,7 @@ Exemplo:
       "last_audit_began_at": "2017-08-02T17:59:14.000Z",
       "last_audit_ended_at": "2017-08-02T17:59:16.000Z",
       "removed_at": null,
+      "no_vend_schedule_id": 1,
       "audit_enabled": true,
       "enable_audit_schedule": true,
       "audit_schedule": "7:00 12:30 18:00 23:50 (instalação)",
@@ -96,6 +97,7 @@ Exemplo:
       "last_audit_began_at": "2017-08-02T17:59:14.000Z",
       "last_audit_ended_at": "2017-08-02T17:59:16.000Z",
       "removed_at": "2014-11-20T10:14:31.000-02:00",
+      "no_vend_schedule_id": 1,
       "audit_enabled": true,
       "enable_audit_schedule": true,
       "audit_schedule": "6:00 10:00 14:00 18:00 22:00 23:50 (padrão)",
@@ -124,6 +126,7 @@ Exemplo:
       "last_audit_began_at": "2017-08-02T17:59:14.000Z",
       "last_audit_ended_at": "2017-08-02T17:59:16.000Z",
       "removed_at": "2014-11-21T19:40:14.000-02:00",
+      "no_vend_schedule_id": null,
       "audit_enabled": false,
       "enable_audit_schedule": false,
       "audit_schedule": "",
@@ -172,6 +175,7 @@ status  descrição
   * *Data e hora em formato ISO 8601*: Data e hora em que a instalação foi baixada.
   * *null*: Caso o valor deste campo seja null, indica que a instalação não foi baixada, ou seja, que a mesma está ativa.
 
+* O campo *no_vend_schedule_id* é o id do alerta de não venda. Caso venha como "null" o sistema considera o alerta padrão do sistema.
 * O campo *audit_schedule* é o calendário de auditoria. Corresponde aos horários separados por espaço, seguidos de uma descrição entre parênteses que indica qual valor é utilizado: o da *instalação*, se o mesmo foi preenchido; ou o *padrão*, caso tenha sido deixado em branco e o valor de *enable_audit_schedule* for *true*. Se *enable_audit_schedule* for *false*, o valor deste campo será vazio.
 * O campo *operation_status* diz respeito ao estado de operação da instalação. Os possíveis valores são os seguintes:
 
@@ -266,6 +270,7 @@ Segue um exemplo de retorno:
       "last_audit_began_at": "2017-08-02T17:59:14.000Z",
       "last_audit_ended_at": "2017-08-02T17:59:16.000Z",
       "removed_at": "2016-01-26T19:21:27.000-02:00",
+      "no_vend_schedule_id": 1,
       "audit_enabled": true,
       "enable_audit_schedule": true,
       "audit_schedule": "7:00 12:30 18:00 23:50 (instalação)",
@@ -477,6 +482,7 @@ Request::
         "notifications_enabled": true,
         "last_audit_began_at": "2017-08-02T17:59:14.000Z",
         "last_audit_ended_at": "2017-08-02T17:59:16.000Z",
+        "no_vend_schedule_id": 1,
         "audit_enabled": true,
         "enable_audit_schedule": true,
         "audit_schedule": "7:00 12:30 18:00 23:50",
@@ -630,6 +636,8 @@ Opcionais
 
   * *place*: local interno.
 
+  * *no_vend_schedule_id*: id do alerta de não venda. Se enviar "null" o sistema irá considerar o alerta padrão do sistema.
+
   * *audit_schedule*: calendário de auditorias.
 
     * Preencher com horários separados por espaços.
@@ -677,6 +685,7 @@ Exemplo:
     "last_audit_began_at": null,
     "last_audit_ended_at": null,
     "removed_at": null,
+    "no_vend_schedule_id": 1,
     "audit_enabled": true,
     "enable_audit_schedule": true,
     "audit_schedule": "7:00 12:30 18:00 23:50 (instalação)",
@@ -993,6 +1002,7 @@ Exemplo:
     "last_audit_began_at": "2017-08-02T17:59:14.000Z",
     "last_audit_ended_at": "2017-08-02T17:59:16.000Z",
     "removed_at": null,
+    "no_vend_schedule_id": 1,
     "audit_enabled": true,
     "enable_audit_schedule": true,
     "audit_schedule": "7:00 12:30 18:00 23:50 (instalação)",

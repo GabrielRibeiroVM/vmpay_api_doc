@@ -17,6 +17,7 @@ Resources disponíveis
    :maxdepth: 1
    :caption: Cadastros
 
+   registries/no_vend_schedule
    registries/category
    registries/client
    registries/country
