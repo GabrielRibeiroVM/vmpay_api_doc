@@ -75,3 +75,9 @@ Resources disponíveis
 
    inventory/distribution_center
    inventory/storable
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Integração
+
+   integration/erp
