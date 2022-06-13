@@ -74,6 +74,10 @@ campos:
 
   - **entered_vacant_amount**: saldo informado para o item no VMpay Visitor
 
+  - **good_id**: o id do produto
+
+  - **upc_code**: código do produto
+
   - **returned_amounts**: lista de retornos do Visitor com os seguintes campos:
 
     + **id**: o id do registro
@@ -163,6 +167,8 @@ Exemplo:
         "capacity": 10.0,
         "expected_vacant_amount": 6.0,
         "entered_vacant_amount": 7.0,
+        "good_id": 522328,
+        "upc_code": "2847",
         "returned_amounts": [
           {
             "id": 15197,
@@ -179,6 +185,8 @@ Exemplo:
         "capacity": 10.0,
         "expected_vacant_amount": 0.0,
         "entered_vacant_amount": 0.0,
+        "good_id": 70679,
+        "upc_code": "1910",
         "returned_amounts": []
       },
       {
@@ -186,6 +194,7 @@ Exemplo:
         "capacity": 13.0,
         "expected_vacant_amount": 5.0,
         "entered_vacant_amount": 2.0,
+        "good_id": 70688,
         "returned_amounts": [
           {
             "id": 15196,
@@ -202,6 +211,7 @@ Exemplo:
         "capacity": 10.0,
         "expected_vacant_amount": 0.0,
         "entered_vacant_amount": 8.0,
+        "good_id": 70678,
         "returned_amounts": [
           {
             "id": 15194,
