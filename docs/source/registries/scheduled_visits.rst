@@ -44,6 +44,8 @@ Cada elemento do array contém os seguintes campos:
 
 * **vacant_amounts_required**: se a visita exige preenchimento de espaços vazios
 
+* **ignore_categorization_visitor**: se a visita permite retornar produtos fora da categorização da agenda
+
 * **checkpoints**: lista dos checkpoints da visita; cada elemento contém:
 
   - **id**: o id do `checkpoint <scheduled_visit_checkpoints.html>`_
@@ -83,6 +85,7 @@ Exemplo:
       "date": "2017-11-24",
       "completed_at": null,
       "vacant_amounts_required": true,
+      "ignore_categorization_visitor": true,
       "checkpoints": [
         {
           "id": 84652,
@@ -121,6 +124,7 @@ Exemplo:
       "date": "2017-12-17",
       "completed_at": "2017-11-14T15:56:25.000-02:00",
       "vacant_amounts_required": true,
+      "ignore_categorization_visitor": false,
       "checkpoints": [
         {
           "id": 84638,
@@ -159,6 +163,7 @@ Exemplo:
       "date": "2017-12-15",
       "completed_at": "2017-11-12T15:56:25.000-02:00",
       "vacant_amounts_required": true,
+      "ignore_categorization_visitor": true,
       "checkpoints": [
         {
           "id": 84638,
@@ -230,6 +235,7 @@ Exemplo:
     "date": "2017-12-17",
     "completed_at": "2017-11-14T15:56:25.000-02:00",
     "vacant_amounts_required": true,
+    "ignore_categorization_visitor": true,
     "checkpoints": [
       {
         "id": 84638,
@@ -294,6 +300,7 @@ Request::
   {
     "scheduled_visit": {
       "vacant_amounts_required": true,
+      "ignore_categorization_visitor": true,
       "creator_id": 84,
       "date": "2017-12-18",
       "scheduled_visit_routes_attributes": [{
@@ -340,6 +347,10 @@ Opcionais
 
     * Valores permitidos: *true* se exige o preenchimento ou *false* se não
       exige.
+
+  * *ignore_categorization_visitor*: Se permite retornar produtos fora da categorização.
+
+    * Valores permitidos: *true* se permite ou *false* se não permite.
 
   * *creator_id*: Id do usuário que está criando.
 
@@ -399,6 +410,7 @@ Exemplo:
     "date": "2017-12-18",
     "completed_at": null,
     "vacant_amounts_required": true,
+    "ignore_categorization_visitor": true,
     "checkpoints": [
       {
         "id": 84653,
@@ -552,6 +564,7 @@ Exemplo:
     "date": "2017-12-18",
     "completed_at": null,
     "vacant_amounts_required": true,
+    "ignore_categorization_visitor": true,
     "checkpoints": [
       {
         "id": 84654,
