@@ -90,7 +90,17 @@ Segue um exemplo de retorno de consulta:
         "id": 6424,
         "upc_code": "1",
         "barcode": 123456789,
-        "name": "Água Mineral"
+        "name": "Água Mineral",
+        "additional_barcodes": [
+            {
+                "id": 20,
+                "value": "987654321"
+            },
+            {
+                "id": 21,
+                "value": "543216789"
+            }
+        ]
       },
       "inventory_balance": 18,
       "desired_price": 36.0
@@ -112,7 +122,8 @@ Segue um exemplo de retorno de consulta:
         "id": 11,
         "upc_code": "88",
         "barcode": 111111111,
-        "name": "Castanha de Caju"
+        "name": "Castanha de Caju",
+        "additional_barcodes": []
       },
       "inventory_balance": 10,
       "desired_price": 60.0
