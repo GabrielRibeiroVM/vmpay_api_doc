@@ -4,9 +4,17 @@ Integração com ERP
 Histórico de alterações
 ***********************
 
-==========  ===============
-2022-05-25  Versão inicial.
-==========  ===============
++------------+-----------------------------------------------------------------------+
+| 2022-05-25 | - Versão inicial                                                      |
++------------+-----------------------------------------------------------------------+
+| 2022-07-12 | - Limita número de itens no parâmetro *inventories* em                |
+|            |   `Registrar evento <#service-vmpay-re>`_.                            |
+|            | - Adiciona o parâmetro *nfe_key* ao evento de *confirmação de venda*. |
+|            | - Adiciona o parâmetro *issues_nfe* o serviço                         |
+|            |   `Registrar venda <#service-erp-rv>`_.                               |
+|            | - Define as formas de pagamento possíveis em                          |
+|            |   `Registrar venda <#service-erp-rv>`_.                               |
++------------+-----------------------------------------------------------------------+
 
 Introdução
 **********
@@ -153,6 +161,7 @@ Confirmação de venda::
       "type": "sale_confirmation",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "sale_id": 120934,
+      "nfe_key": "12345",
       "nfe_danfe_url": "https://site.com/12345.pdf",
       "nfe_xml_url": "https://site.com/12345.xml",
     }
@@ -226,10 +235,11 @@ Campos
   * *transport_nfe_danfe_url*: a URL do DANFE da NFe de transporte. Pode ser informada no evento *confirmação de pick list*.
   * *transport_nfe_xml_url*: a URL do XML da NFe de transporte. Pode ser informada no evento *confirmação de pick list*.
   * *sale_id*: o id da venda. Deve ser informado nos eventos *confirmação de venda* e *erro em confirmação de venda*.
+  * *nfe_key*: a chave da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_danfe_url*: a URL do DANFE da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_xml_url*: a URL do XML da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *errors*: um array com os erros da operação, se existirem. Deve ser informado nos eventos *erro em confirmação de pick list* e *erro em cancelamento de pick list*.
-  * *inventories*: array com os estoques a serem atualizados, um elemento por *storable* (produto). É obrigatório nos eventos *entrada de estoque*, *confirmação de pick list*, *cancelamento de pick list*, *ajuste de estoque* e *sincronização de estoque*.
+  * *inventories*: array com os estoques a serem atualizados, um elemento por *storable* (produto). É obrigatório nos eventos *entrada de estoque*, *confirmação de pick list*, *cancelamento de pick list*, *ajuste de estoque* e *sincronização de estoque*. Pode ter no máximo 1000 itens nos eventos *entrada de estoque*, *ajuste de estoque* e *sincronização de estoque*; é ilimitado nos eventos *confirmação de pick list* e *cancelamento de pick list*.
 
     * *storable_id*: o id do produto.
     * *delta*: a diferença de estoque movimentada, positiva para entradas, negativas para saídas. Não é necessário informar na *sicronização de estoque*.
@@ -427,9 +437,10 @@ Request::
       "machine_id": 12,
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "payment_method": {
-        "id": 1,
-        "description": "Martercard Crédito"
+        "id": 2,
+        "description": "Cartão de crédito"
       },
+      "issues_nfe": true,
       "consumer_cpf": "30851852912",
       "consumer_email": "user@vmpay.com.br",
       "items": [
@@ -459,9 +470,10 @@ Campos
   * *occurred_at*: data e hora em que ocorreu a venda no VMpay, formato ISO 8601.
   * *payment_method*: a forma de pagamento.
 
-    * *id*: o id da forma de pagamento (tabela a ser fornecida).
+    * *id*: o id da forma de pagamento (tabela listada `abaixo <#payment-methods>`_).
     * *description*: a descrição da forma de pagamento
 
+  * *issues_nfe*: indica de NFe deve ou não ser emitida.
   * *consumer_cpf*: CPF do consumidor (opcional).
   * *consumer_email*: e-mail do consumidor (opcional).
   * *items*: array com os itens da venda.
@@ -470,6 +482,28 @@ Campos
     * *quantity*: a quantidade vendida.
     * *price*: o preço total pago pelo item.
     * *balance*: o saldo do produto na máquina após a venda.
+
+.. _payment-methods:
+
+Formas de Pagamento
+-------------------
+
+== ===================
+id description
+== ===================
+1  Dinheiro
+2  Cartão de crédito
+3  Cartão de débito
+4  Voucher alimentação
+5  Voucher refeição
+6  Private label
+7  Créditos pré-pagos
+8  PIX
+9  PicPay
+10 Mercado Pago
+11 Ame Digital
+12 Gran Coffee Digital
+== ===================
 
 Retorno
 -------
