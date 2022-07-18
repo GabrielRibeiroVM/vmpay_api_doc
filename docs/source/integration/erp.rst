@@ -10,10 +10,22 @@ Histórico de alterações
 | 2022-07-12 | - Limita número de itens no parâmetro *inventories* em                |
 |            |   `Registrar evento <#service-vmpay-re>`_.                            |
 |            | - Adiciona o parâmetro *nfe_key* ao evento de *confirmação de venda*. |
-|            | - Adiciona o parâmetro *issues_nfe* o serviço                         |
+|            | - Adiciona o parâmetro *issues_nfe* ao serviço                        |
 |            |   `Registrar venda <#service-erp-rv>`_.                               |
 |            | - Define as formas de pagamento possíveis em                          |
 |            |   `Registrar venda <#service-erp-rv>`_.                               |
++------------+-----------------------------------------------------------------------+
+| 2022-07-18 | - Inclui formas de pagamento faltantes em                             |
+|            |   `Registrar venda <#service-erp-rv>`_.                               |
+|            | - Exclui o parâmetro *issues_nfe* do serviço                          |
+|            |   `Registrar venda <#service-erp-rv>`_.                               |
+|            | - Adiciona os parâmetro *price* e *quantity* ao serviço               |
+|            |   `Registrar venda <#service-erp-rv>`_.                               |
+|            | - Atualiza o exemplo de request para melhor refletir tipos em         |
+|            |   `Registrar venda <#service-erp-rv>`_.                               |
+|            | - Corrige documentação em `Registrar venda <#service-erp-rv>`_: o     |
+|            |   *price* em *items* trata-se do  preço **unitário**, e não do total  |
+|            |   do item.                                                            |
 +------------+-----------------------------------------------------------------------+
 
 Introdução
@@ -440,21 +452,22 @@ Request::
         "id": 2,
         "description": "Cartão de crédito"
       },
-      "issues_nfe": true,
       "consumer_cpf": "30851852912",
       "consumer_email": "user@vmpay.com.br",
+      "price": "17.00",
+      "quantity": 3.0,
       "items": [
         {
           "storable_id": 123,
-          "quantity": 1,
-          "price": "5.00",
-          "balance": 4
+          "price": "5.0",
+          "quantity": 1.0,
+          "balance": 4.0
         },
         {
           "storable_id": 321,
-          "quantity": 2,
-          "price": "12.00",
-          "balance": 8
+          "price": "12.0",
+          "quantity": 2.0,
+          "balance": 8.0
         }
       ]
     }
@@ -473,15 +486,16 @@ Campos
     * *id*: o id da forma de pagamento (tabela listada `abaixo <#payment-methods>`_).
     * *description*: a descrição da forma de pagamento
 
-  * *issues_nfe*: indica de NFe deve ou não ser emitida.
   * *consumer_cpf*: CPF do consumidor (opcional).
   * *consumer_email*: e-mail do consumidor (opcional).
+  * *price*: O preço total da venda.
+  * *quantity*: A quantidade total da venda.
   * *items*: array com os itens da venda.
 
     * *storable_id*: o id do produto.
-    * *quantity*: a quantidade vendida.
-    * *price*: o preço total pago pelo item.
-    * *balance*: o saldo do produto na máquina após a venda.
+    * *price*: o preço **unitário** do item.
+    * *quantity*: a quantidade vendida do item.
+    * *balance*: o saldo do produto na máquina **após** a venda.
 
 .. _payment-methods:
 
@@ -503,6 +517,9 @@ id description
 10 Mercado Pago
 11 Ame Digital
 12 Gran Coffee Digital
+13 Crédito remoto
+14 Autorizador externo
+15 Indefinido
 == ===================
 
 Retorno

@@ -1,0 +1,11 @@
+#historico-de-alteracoes .wy-table-responsive table td {
+  white-space: normal;
+}
+
+#historico-de-alteracoes table colgroup col:first-child {
+  width: 17% !important;
+}
+
+#historico-de-alteracoes table colgroup col:second-child {
+  width: 83% !important;
+}
