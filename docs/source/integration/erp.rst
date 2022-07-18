@@ -27,6 +27,13 @@ Histórico de alterações
 |            |   *price* em *items* trata-se do  preço **unitário**, e não do total  |
 |            |   do item.                                                            |
 +------------+-----------------------------------------------------------------------+
+| 2022-07-18 | - Para deixar o intuito mais claro, foram renomeados alguns parâmetros|
+|            |   em `Registrar venda <#service-erp-rv>`_: *price* -> *total_price*,  |
+|            |   *quantity* -> *total_quantity*, *items.price* -> *items.unit_price*,|
+|            |   *items.balance* -> *items.balance_after*.                           |
+|            | - Adiciona os parâmetros *items.number*, *items.total_discount* e     |
+|            |   *items.total_price* em `Registrar venda <#service-erp-rv>`_.        |
++------------+-----------------------------------------------------------------------+
 
 Introdução
 **********
@@ -454,20 +461,26 @@ Request::
       },
       "consumer_cpf": "30851852912",
       "consumer_email": "user@vmpay.com.br",
-      "price": "17.00",
-      "quantity": 3.0,
+      "total_price": 27.5,
+      "total_quantity": 3.0,
       "items": [
         {
+          "number": 1,
           "storable_id": 123,
-          "price": "5.0",
+          "unit_price": 5.0,
           "quantity": 1.0,
-          "balance": 4.0
+          "total_discount": 0,
+          "total_price": 5.0
+          "balance_after": 4.0
         },
         {
+          "number": 2,
           "storable_id": 321,
-          "price": "12.0",
+          "unit_price": 12.0,
           "quantity": 2.0,
-          "balance": 8.0
+          "total_discount": 1.5,
+          "total_price": 22.5,
+          "balance_after": 8.0
         }
       ]
     }
@@ -488,14 +501,17 @@ Campos
 
   * *consumer_cpf*: CPF do consumidor (opcional).
   * *consumer_email*: e-mail do consumidor (opcional).
-  * *price*: O preço total da venda.
-  * *quantity*: A quantidade total da venda.
+  * *total_price*: O preço total da venda.
+  * *total_quantity*: A quantidade total da venda.
   * *items*: array com os itens da venda.
 
+    * *number*: o número do item.
     * *storable_id*: o id do produto.
-    * *price*: o preço **unitário** do item.
+    * *unit_price*: o preço unitário do item.
     * *quantity*: a quantidade vendida do item.
-    * *balance*: o saldo do produto na máquina **após** a venda.
+    * *total_discount*: o desconto total do item.
+    * *total_price*: o preço total do item.
+    * *balance_after*: o saldo do produto na máquina após a venda.
 
 .. _payment-methods:
 
