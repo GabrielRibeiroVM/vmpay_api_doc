@@ -34,6 +34,10 @@ Histórico de alterações
 |            | - Adiciona os parâmetros *items.number*, *items.total_discount* e     |
 |            |   *items.total_price* em `Registrar venda <#service-erp-rv>`_.        |
 +------------+-----------------------------------------------------------------------+
+| 2022-07-20 | - Para manter o padrão entre os serviços, os parâmetros de            |
+|            |   `Ajustar estoques de máquina <#service-erp-aem>`_ foram indentados  |
+|            |   dentro de *inventory_adjustment*.                                   |
++------------+-----------------------------------------------------------------------+
 
 Introdução
 **********
@@ -568,30 +572,34 @@ id         id da máquina  sim
 Request::
 
   {
-    "occurred_at": "2022-05-25T12:34:56.000Z",
-    "inventories": [
-      {
-        "storable_id": 123,
-        "delta": 1,
-        "balance": 5
-      },
-      {
-        "storable_id": 321,
-        "delta": -1,
-        "balance": 7
-      }
-    ]
+    "inventory_adjustment": {
+      "occurred_at": "2022-05-25T12:34:56.000Z",
+      "inventories": [
+        {
+          "storable_id": 123,
+          "delta": 1,
+          "balance": 5
+        },
+        {
+          "storable_id": 321,
+          "delta": -1,
+          "balance": 7
+        }
+      ]
+    }
   }
 
 Campos
 ------
 
-* *occurred_at*: data e hora em que ocorreu o ajuste no VMpay, formato ISO 8601.
-* *inventories*: array com os estoques a serem ajustados, um elemento por *storable* (produto).
+* *inventory_adjustment*:
 
-  * *storable_id*: o id do produto.
-  * *delta*: a diferença de estoque.
-  * *balance*: o saldo final do estoque depois do ajuste.
+  * *occurred_at*: data e hora em que ocorreu o ajuste no VMpay, formato ISO 8601.
+  * *inventories*: array com os estoques a serem ajustados, um elemento por *storable* (produto).
+
+    * *storable_id*: o id do produto.
+    * *delta*: a diferença de estoque.
+    * *balance*: o saldo final do estoque depois do ajuste.
 
 Retorno
 -------
