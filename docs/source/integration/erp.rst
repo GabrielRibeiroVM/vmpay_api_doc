@@ -38,6 +38,14 @@ Histórico de alterações
 |            |   `Ajustar estoques de máquina <#service-erp-aem>`_ foram indentados  |
 |            |   dentro de *inventory_adjustment*.                                   |
 +------------+-----------------------------------------------------------------------+
+| 2022-07-21 | - Renomeia parâmetro *errors* para *erp_errors* em                    |
+|            |   `Registrar evento <#service-vmpay-re>`_ (eventos *erro em           |
+|            |   confirmação de pick list*, *erro em cancelamento de pick list* e    |
+|            |   *erro em confirmação de venda*).                                    |
+|            | - Adiciona os parâmetros *cnpj_authorizer*, *authorization_code* e    |
+|            |   *card_brand* em `Registrar venda <#service-erp-rv>`_.               |
+|            | - Correções diversas no texto da documentação.                        |
++------------+-----------------------------------------------------------------------+
 
 Introdução
 **********
@@ -134,7 +142,7 @@ Erro em confirmação de pick list::
       "type": "error_pick_list_confirmation",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "pick_list_id": 12345,
-      "errors": [
+      "erp_errors": [
         "Erro 1",
         "Erro 2"
       ]
@@ -170,7 +178,7 @@ Erro em cancelamento de pick list::
       "type": "error_pick_list_cancellation",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "pick_list_id": 12345,
-      "errors": [
+      "erp_errors": [
         "Erro 1",
         "Erro 2"
       ]
@@ -197,7 +205,7 @@ Erro em confirmação de venda::
       "type": "error_sale_confirmation",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "sale_id": 120934,
-      "errors": [
+      "erp_errors": [
         "Erro 1",
         "Erro 2"
       ]
@@ -261,7 +269,7 @@ Campos
   * *nfe_key*: a chave da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_danfe_url*: a URL do DANFE da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_xml_url*: a URL do XML da NFe de venda. Pode ser informada no evento *confirmação de venda*.
-  * *errors*: um array com os erros da operação, se existirem. Deve ser informado nos eventos *erro em confirmação de pick list* e *erro em cancelamento de pick list*.
+  * *erp_errors*: um array com os erros da operação, se existirem. Deve ser informado nos eventos *erro em confirmação de pick list*, *erro em cancelamento de pick list* e *erro em confirmação de venda*.
   * *inventories*: array com os estoques a serem atualizados, um elemento por *storable* (produto). É obrigatório nos eventos *entrada de estoque*, *confirmação de pick list*, *cancelamento de pick list*, *ajuste de estoque* e *sincronização de estoque*. Pode ter no máximo 1000 itens nos eventos *entrada de estoque*, *ajuste de estoque* e *sincronização de estoque*; é ilimitado nos eventos *confirmação de pick list* e *cancelamento de pick list*.
 
     * *storable_id*: o id do produto.
@@ -301,9 +309,7 @@ status  descrição                              response body
 Serviços implementados no ERP
 *****************************
 
-Este ainda é apenas um esboço incial do formato esperado dos serviços em questão.
-
-Espera-se que estes serviços também sejam implementados de forma assíncrona.
+Estes são os serviços que devem ser implementados no ERP e que serão chamados pelo VMpay. Espera-se que estes serviços também sejam implementados de forma assíncrona.
 
 Autenticação
 ============
@@ -463,6 +469,12 @@ Request::
         "id": 2,
         "description": "Cartão de crédito"
       },
+      "cnpj_authorizer": "01027058000191",
+      "authorization_code": "12345678",
+      "card_brand": {
+        "code": "01",
+        "description": "Visa"
+      },
       "consumer_cpf": "30851852912",
       "consumer_email": "user@vmpay.com.br",
       "total_price": 27.5,
@@ -502,6 +514,13 @@ Campos
 
     * *id*: o id da forma de pagamento (tabela listada `abaixo <#payment-methods>`_).
     * *description*: a descrição da forma de pagamento
+
+  * *cnpj_authorizer*: o CNPJ da credenciadora TEF.
+  * *authorization_code*: o código de autorização TEF.
+  * *card_brand*: a bandeira do cartão.
+
+    * *code*: o código da bandeira. É um dentre os definidos pelo SEFAZ. A lista dos códigos disponíveis encontra-se `aqui <http://www.nfe.fazenda.gov.br/portal/exibirArquivo.aspx?conteudo=HoyGo5PttVk=>`_.
+    * *description*: a descrição da bandeira.
 
   * *consumer_cpf*: CPF do consumidor (opcional).
   * *consumer_email*: e-mail do consumidor (opcional).
