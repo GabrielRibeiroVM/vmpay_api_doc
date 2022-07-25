@@ -46,6 +46,9 @@ Histórico de alterações
 |            |   *card_brand* em `Registrar venda <#service-erp-rv>`_.               |
 |            | - Correções diversas no texto da documentação.                        |
 +------------+-----------------------------------------------------------------------+
+| 2022-07-25 | - Muda nome de header *API-key* para *X-API-Key* em                   |
+|            |   `Serviços implementados no ERP <#services-erp>`_.                   |
++------------+-----------------------------------------------------------------------+
 
 Introdução
 **********
@@ -306,6 +309,8 @@ status  descrição                              response body
     ]
   }
 
+.. _services-erp:
+
 Serviços implementados no ERP
 *****************************
 
@@ -314,13 +319,13 @@ Estes são os serviços que devem ser implementados no ERP e que serão chamados
 Autenticação
 ============
 
-A autenticação deverá ser realizada através de uma chave de API única gerada pelo sistema e atribuída a um usuário. O header *API-Key* deverá ser informado em todos os requests, pois o acesso à API só deverá ser permitido para usuários autenticados.
+A autenticação deverá ser realizada através de uma chave de API única gerada pelo sistema e atribuída a um usuário. O header *X-API-Key* deverá ser informado em todos os requests, pois o acesso à API só deverá ser permitido para usuários autenticados.
 
 O valor do header deve ser algo como:
 
 ::
 
-  API-Key: sua-chave-api
+  X-API-Key: sua-chave-api
 
 Caso uma chave de API não seja informada, o request deverá falhar com status 401. Caso uma chave de API não autorizada seja informada o request deverá falhar com o status 403.
 
