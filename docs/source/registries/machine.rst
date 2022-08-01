@@ -152,6 +152,7 @@ Opcionais
 
 * *machine*
 
+  * *distribution_center_id*: o centro de distribuição da máquina.
   * *external_id*: identificador externo da máquina.
   * *tags*: array com tags.
 
