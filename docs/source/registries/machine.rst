@@ -131,6 +131,7 @@ Request::
     "machine": {
       "asset_number": "01234",
       "machine_model_id": "12",
+      "distribution_center_id": 123,
       "external_id": "qwe123",
       "tags": ["tag1", "tag2"]
     }
