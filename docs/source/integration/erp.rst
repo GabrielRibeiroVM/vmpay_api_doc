@@ -49,6 +49,10 @@ Histórico de alterações
 | 2022-07-25 | - Muda nome de header *API-key* para *X-API-Key* em                   |
 |            |   `Serviços implementados no ERP <#services-erp>`_.                   |
 +------------+-----------------------------------------------------------------------+
+| 2022-08-12 | - Documenta novo parâmetro *fatal_erp_error* em                       |
+|            |   `Registrar evento <#service-vmpay-re>`_ (eventos *erro em           |
+|            |   confirmação de pick list* e *erro em cancelamento de pick list*).   |
++------------+-----------------------------------------------------------------------+
 
 Introdução
 **********
@@ -145,6 +149,7 @@ Erro em confirmação de pick list::
       "type": "error_pick_list_confirmation",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "pick_list_id": 12345,
+      "fatal_erp_error": false,
       "erp_errors": [
         "Erro 1",
         "Erro 2"
@@ -181,6 +186,7 @@ Erro em cancelamento de pick list::
       "type": "error_pick_list_cancellation",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "pick_list_id": 12345,
+      "fatal_erp_error": false,
       "erp_errors": [
         "Erro 1",
         "Erro 2"
@@ -272,6 +278,7 @@ Campos
   * *nfe_key*: a chave da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_danfe_url*: a URL do DANFE da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_xml_url*: a URL do XML da NFe de venda. Pode ser informada no evento *confirmação de venda*.
+  * *fatal_erp_error*: um booleano indicando se pelo menos um dos erros foi fatal. Este campo deve ser utilizado com cautela, pois, se ele for *true*, a pick list será **cancelada**! Pode ser informado nos eventos *erro em confirmação de pick list* e *erro em cancelamento de pick list*.
   * *erp_errors*: um array com os erros da operação, se existirem. Deve ser informado nos eventos *erro em confirmação de pick list*, *erro em cancelamento de pick list* e *erro em confirmação de venda*.
   * *inventories*: array com os estoques a serem atualizados, um elemento por *storable* (produto). É obrigatório nos eventos *entrada de estoque*, *confirmação de pick list*, *cancelamento de pick list*, *ajuste de estoque* e *sincronização de estoque*. Pode ter no máximo 1000 itens nos eventos *entrada de estoque*, *ajuste de estoque* e *sincronização de estoque*; é ilimitado nos eventos *confirmação de pick list* e *cancelamento de pick list*.
 
