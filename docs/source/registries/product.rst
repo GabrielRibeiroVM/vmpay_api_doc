@@ -9,6 +9,19 @@ Listar
 
   GET /api/v1/products
 
+Filtros
+-------
+
+Os parâmetros abaixo podem ser passados como uma
+`query string <https://en.wikipedia.org/wiki/Query_string>`_. Mais de um filtro
+pode ser passado na mesma consulta.
+
+Este serviço suporta `paginação <../overview.html#paginacao>`_.
+
+* **include_deleted**: indica se deseja incluir no retorno os produtos excluídos. (true/false)
+
+  * Se não for informado, será considerado false como padrão.
+
 Retorno
 -------
 
@@ -88,6 +101,7 @@ Exemplo::
       "weight": null,
       "vendible_balance": -6.0,
       "tags": ["tag1", "tag3"],
+      "deleted_at": "2014-12-17T14:51:30.000-03:00",
       "cost_price": null,
       "additional_barcodes": [],
       "packing": {
