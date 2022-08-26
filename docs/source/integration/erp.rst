@@ -53,6 +53,15 @@ Histórico de alterações
 |            |   `Registrar evento <#service-vmpay-re>`_ (eventos *erro em           |
 |            |   confirmação de pick list* e *erro em cancelamento de pick list*).   |
 +------------+-----------------------------------------------------------------------+
+| 2022-08-26 | - Documenta o serviço                                                 |
+|            |   `Baixa de estoque de máquina <#service-erp-bem>`_ do ERP e os       |
+|            |   eventos *retorno de estoque* e *erro de retorno de estoque* em      |
+|            |   `Registrar evento <#service-vmpay-re>`_.                            |
+|            | - Documenta erros do serviço                                          |
+|            |   `Confirmar pick list <#service-erp-copl>`_.                         |
+|            | - Muda os eventos de erro para serem eventos de log em                |
+|            |   `Registrar evento <#service-vmpay-re>`_.                            |
++------------+-----------------------------------------------------------------------+
 
 Introdução
 **********
@@ -62,21 +71,34 @@ A integração entre o VMpay e um ERP se dá, principalmente, através da sincro
 Abaixo, o fluxo básico:
 
 * O ERP informa a entrada de estoque de determinados produtos em algum centro de distribuição através da chamada do serviço `Registrar evento <#service-vmpay-re>`_ com o tipo *inventory_entry*. O *distribution_center_id* deve ser passado.
-* O usuário cria uma pick list no VMpay. O usuário pode editar várias vezes a pick list até ficar satisfeito com resultado.
+* O usuário cria uma pick list no VMpay, a qual fica pendente. O usuário pode editar várias vezes a pick list até ficar satisfeito com resultado.
 * O usuário, então, libera a pick list e o serviço `Confirmar pick list <#service-erp-copl>`_ do ERP é chamado. O *pick_list_id* é passado como parâmetro. A pick list fica em estado de aguardando confirmação e, a partir deste momento, não pode ser mais editada.
+
+  * Este serviço pode retornar erros de validação. Nesse caso, a pick list voltará a ficar pendente.
+
 * O ERP faz as operações internas necessárias e, quando tudo estiver OK, chama o serviço `Registrar evento <#service-vmpay-re>`_ com o tipo *pick_list_confirmation*, informando também o *distribution_center_id*, o *pick_list_id*, os dados da nota fiscal de transporte e os novos saldos do centro de distribuição. A pick list é confirmada no VMpay.
+
+  * Enquanto o evento de *confirmação de pick list* não for enviado, o ERP pode enviar vários eventos de log do tipo *pick_list_confirmation_log*. Estes podem ser somente uma notificação informativa (*log_level* igual a *information* ou *warning*) ou até algum erro (*log_level* igual a *error* ou *fatal*). Se o erro for fatal, a pick list será cancelada.
+
 * Neste ponto o usuário pode cancelar a pick list, se encontrar algum problema. Se isso for feito, o serviço `Cancelar pick list <#service-erp-capl>`_ do ERP será chamado e a pick list ficará em estado de aguardando cancelamento.
 
   * Após o cancelamento no ERP, o serviço `Registrar evento <#service-vmpay-re>`_ é chamado novamente, agora com o tipo *pick_list_cancellation*. O *distribution_center_id*, o *pick_list_id* e os novos saldos do centro de distribuição também são passados. O VMpay, então, cancela a pick list.
+
+    * Enquanto o evento de *cancelamento de pick list* não for enviado, o ERP pode enviar vários eventos de log do tipo *pick_list_cancellation_log*. Se o erro for fatal, a pick list voltará a ficar confirmada.
 
 * Porém, se tudo estiver OK com a pick list, a mesma é posteriormente aplicada no VMpay. A partir deste momento o estoque na máquina é efetivamente atualizado no VMpay, o qual, então, chama o serviço `Aplicar pick list <#service-erp-apl>`_ do ERP.
 * Quando ocorrer alguma venda no VMpay, o serviço `Registrar venda <#service-erp-rv>`_ do ERP é chamado com as informações da venda.
 
   * Após o processamento da venda no ERP, o serviço `Registrar evento <#service-vmpay-re>`_ é chamado com o tipo *sale_confirmation*, o *sale_id* e os dados da nota fiscal de venda.
 
+    * Enquanto o evento de *confirmação de venda* não for enviado, o ERP pode enviar vários eventos de log do tipo *sale_confirmation_log*.
+
 * Quando ocorrer um ajuste de estoque na máquina no VMpay, o serviço `Ajustar estoques de máquina <#service-erp-aem>`_ do ERP é chamado com as informações do que foi alterado.
 * O ERP pode a qualquer momento fazer um ajuste de estoque no centro de distribuição. Quando isso ocorrer, o serviço `Registrar evento <#service-vmpay-re>`_ é chamado com o tipo *inventory_adjustment*.
 * O ERP pode também fazer uma sincronização de estoque do centro de distribuição com o VMpay. Para tanto, o serviço `Registrar evento <#service-vmpay-re>`_ deve ser chamado com o tipo *inventory_synchronization*.
+* Quando um ou mais produtos deixam de ser vendidos em uma máquina, o serviço `Baixa de estoque de máquina <#service-erp-bem>`_ do ERP é chamado com as informações dos produtos baixados e o seus saldos antes da baixa. Esses produtos devem ser movimentados de volta para o centro de distribuição. Para tanto, o ERP faz as operações necessárias e, depois, o serviço `Registrar evento <#service-vmpay-re>`_ é chamado com o tipo *inventory_return*, o *distribution_center_id*, o *machine_inventory_removal_id* e os novos saldos do centro de distribuição.
+
+  * Enquanto o evento de *retorno de estque* não for enviado, o ERP pode enviar vários eventos de log do tipo *inventory_return_log*.
 
 Serviços implementados no VMpay
 *******************************
@@ -90,7 +112,7 @@ Registrar evento
 
   POST /api/v1/erp/events
 
-Este é o serviço principal de integração acessível ao ERP. Por ele registram-se os seguintes eventos: *entrada de estoque*, *confirmação de pick list*, *erro em confirmação de pick list*, *cancelamento de pick list*, *erro em cancelamento de pick list*, *confirmação de venda*, *erro em confirmação de venda*, *ajuste de estoque* e *sincronização de estoque*.
+Este é o serviço principal de integração acessível ao ERP. Por ele registram-se os seguintes eventos: *entrada de estoque*, *confirmação de pick list*, *log de confirmação de pick list*, *cancelamento de pick list*, *log de cancelamento de pick list*, *confirmação de venda*, *log de confirmação de venda*, *ajuste de estoque*, *sincronização de estoque*, *retorno de estoque* e *log de retorno de estoque*.
 
 Cada serviço possui um formato de payload diferente. Listamos um exemplo de cada abaixo.
 
@@ -142,17 +164,17 @@ Confirmação de pick list::
     }
   }
 
-Erro em confirmação de pick list::
+Log de confirmação de pick list::
 
   {
     "event": {
-      "type": "error_pick_list_confirmation",
+      "type": "pick_list_confirmation_log",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "pick_list_id": 12345,
-      "fatal_erp_error": false,
-      "erp_errors": [
-        "Erro 1",
-        "Erro 2"
+      "log_level": "fatal",
+      "log_messages": [
+        "Mensagem 1",
+        "Mensagem 2"
       ]
     }
   }
@@ -179,17 +201,17 @@ Cancelamento de pick list::
     }
   }
 
-Erro em cancelamento de pick list::
+Log de cancelamento de pick list::
 
   {
     "event": {
-      "type": "error_pick_list_cancellation",
+      "type": "pick_list_cancellation_log",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "pick_list_id": 12345,
-      "fatal_erp_error": false,
-      "erp_errors": [
-        "Erro 1",
-        "Erro 2"
+      "log_level": "error",
+      "log_messages": [
+        "Mensagem 1",
+        "Mensagem 2"
       ]
     }
   }
@@ -207,16 +229,17 @@ Confirmação de venda::
     }
   }
 
-Erro em confirmação de venda::
+Log de confirmação de venda::
 
   {
     "event": {
-      "type": "error_sale_confirmation",
+      "type": "sale_confirmation_log",
       "occurred_at": "2022-05-25T12:34:56.000Z",
       "sale_id": 120934,
-      "erp_errors": [
-        "Erro 1",
-        "Erro 2"
+      "log_level": "warning",
+      "log_messages": [
+        "Mensagem 1",
+        "Mensagem 2"
       ]
     }
   }
@@ -263,24 +286,64 @@ Sincronização::
     }
   }
 
+Retorno de estoque::
+
+  {
+    "event": {
+      "type": "inventory_return",
+      "occurred_at": "2022-05-25T12:34:56.000Z",
+      "distribution_center_id": 1,
+      "machine_inventory_removal_id": 123,
+      "inventories": [
+        {
+          "storable_id": 123,
+          "delta": 10,
+          "balance": 133
+        },
+        {
+          "storable_id": 321,
+          "delta": 10,
+          "balance": 331
+        }
+      ]
+    }
+  }
+
+Log de retorno estoque::
+
+  {
+    "event": {
+      "type": "inventory_return_log",
+      "occurred_at": "2022-05-25T12:34:56.000Z",
+      "distribution_center_id": 1,
+      "machine_inventory_removal_id": 123,
+      "log_level": "information",
+      "log_messages": [
+        "Mensagem 1",
+        "Mensagem 2"
+      ]
+    }
+  }
+
 Campos
 ------
 
 * *event*:
 
-  * *type*: o tipo do evento. Deve ser um dos seguintes: *inventory_entry*, *pick_list_confirmation*, *error_pick_list_confirmation*, *pick_list_cancellation*, *error_pick_list_cancellation*, *sale_confirmation*, *error_sale_confirmation*, *inventory_adjustment* ou *inventory_synchronization*.
+  * *type*: o tipo do evento. Deve ser um dos seguintes: *inventory_entry*, *pick_list_confirmation*, *pick_list_confirmation_log*, *pick_list_cancellation*, *pick_list_cancellation_log*, *sale_confirmation*, *sale_confirmation_log*, *inventory_adjustment*, *inventory_synchronization*, *inventory_return* ou *inventory_return_log*.
   * *occurred_at*: data e hora em que ocorreu o evento no ERP, formato ISO 8601.
   * *distribution_center_id*: o id do centro de distribuição. É obrigatório nos eventos *entrada de estoque*, *ajuste de estoque* e *sincronização de estoque*.
-  * *pick_list_id*: o id da pick list associada a um evento. É obrigatório nos eventos *confirmação de pick list*, *erro em confirmação de pick list*, *cancelamento de pick list* e *erro em cancelamento de pick list*.
+  * *pick_list_id*: o id da pick list associada a um evento. É obrigatório nos eventos *confirmação de pick list*, *log em confirmação de pick list*, *cancelamento de pick list* e *log em cancelamento de pick list*.
   * *transport_nfe_danfe_url*: a URL do DANFE da NFe de transporte. Pode ser informada no evento *confirmação de pick list*.
   * *transport_nfe_xml_url*: a URL do XML da NFe de transporte. Pode ser informada no evento *confirmação de pick list*.
-  * *sale_id*: o id da venda. Deve ser informado nos eventos *confirmação de venda* e *erro em confirmação de venda*.
+  * *sale_id*: o id da venda. Deve ser informado nos eventos *confirmação de venda* e *log em confirmação de venda*.
   * *nfe_key*: a chave da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_danfe_url*: a URL do DANFE da NFe de venda. Pode ser informada no evento *confirmação de venda*.
   * *nfe_xml_url*: a URL do XML da NFe de venda. Pode ser informada no evento *confirmação de venda*.
-  * *fatal_erp_error*: um booleano indicando se pelo menos um dos erros foi fatal. Este campo deve ser utilizado com cautela, pois, se ele for *true*, a pick list será **cancelada**! Pode ser informado nos eventos *erro em confirmação de pick list* e *erro em cancelamento de pick list*.
-  * *erp_errors*: um array com os erros da operação, se existirem. Deve ser informado nos eventos *erro em confirmação de pick list*, *erro em cancelamento de pick list* e *erro em confirmação de venda*.
-  * *inventories*: array com os estoques a serem atualizados, um elemento por *storable* (produto). É obrigatório nos eventos *entrada de estoque*, *confirmação de pick list*, *cancelamento de pick list*, *ajuste de estoque* e *sincronização de estoque*. Pode ter no máximo 1000 itens nos eventos *entrada de estoque*, *ajuste de estoque* e *sincronização de estoque*; é ilimitado nos eventos *confirmação de pick list* e *cancelamento de pick list*.
+  * *machine_inventory_removal_id*: o id da baixa de estoque. Deve ser informado nos eventos *retorno de estoque* e *log de retorno de estoque*.
+  * *log_level*: o nível de log. Pode ser um dentre os seguintes valores: *information*, *warning*, *error* ou *fatal*. A explicação de cada valor: *information* é usado para qualquer notificação informativa; *warning*, em caso de erro recuperável automaticamente pelo sistema; *error*, em caso de erro recuperável com interação do usuário; *fatal*, quando for um erro não recuperável. Este campo deve ser informado nos eventos *log em confirmação de pick list*, *log em cancelamento de pick list*, *log em confirmação de venda* e *log de retorno de estoque*.
+  * *log_messages*: um array com as mensagens de log. Deve ser informado nos eventos *log em confirmação de pick list*, *log em cancelamento de pick list*, *log em confirmação de venda* e *log de retorno de estoque*.
+  * *inventories*: array com os estoques a serem atualizados, um elemento por *storable* (produto). É obrigatório nos eventos *entrada de estoque*, *confirmação de pick list*, *cancelamento de pick list*, *ajuste de estoque*, *sincronização de estoque* e *retorno de estoque*. Pode ter no máximo 1000 itens nos eventos *entrada de estoque*, *ajuste de estoque* e *sincronização de estoque*; é ilimitado nos eventos *confirmação de pick list*, *cancelamento de pick list* e *retorno de estoque*.
 
     * *storable_id*: o id do produto.
     * *delta*: a diferença de estoque movimentada, positiva para entradas, negativas para saídas. Não é necessário informar na *sicronização de estoque*.
@@ -397,6 +460,26 @@ status  descrição
 ======  =========
 201     OK
 ======  =========
+
+Erros
+-----
+
+======  ==================  ==================
+status  descrição           response body
+======  ==================  ==================
+422     erros de validação  ver exemplo abaixo
+======  ==================  ==================
+
+422 - erros de validação
+
+::
+
+  {
+    "errors": [
+      "Produto 123 não encontrado",
+      "Algum outro erro"
+    ]
+  }
 
 .. _service-erp-capl:
 
@@ -631,6 +714,66 @@ Campos
     * *storable_id*: o id do produto.
     * *delta*: a diferença de estoque.
     * *balance*: o saldo final do estoque depois do ajuste.
+
+Retorno
+-------
+
+======  ==============================
+status  descrição
+======  ==============================
+200     Atualização criada com sucesso
+======  ==============================
+
+.. _service-erp-bem:
+
+Baixa de estoque de máquina
+===========================
+
+::
+
+  POST /machines/[id]/inventory_removals
+
+Parâmetros de URL:
+------------------
+
+=========  =============  ===========
+parâmetro  descrição      obrigatório
+=========  =============  ===========
+id         id da máquina  sim
+=========  =============  ===========
+
+Request::
+
+  {
+    "inventory_removal": {
+      "id": 8246,
+      "distribution_center_id": 123,
+      "occurred_at": "2022-05-25T12:34:56.000Z",
+      "inventories": [
+        {
+          "storable_id": 123,
+          "balance_before": 5
+        },
+        {
+          "storable_id": 321,
+          "balance_before": 6
+        }
+      ]
+    }
+  }
+
+Campos
+------
+
+* *inventory_removal*:
+
+  * *id*: o id da baixa de estoque.
+  * *distribution_center_id*: o id do centro de distribuição de destino.
+  * *occurred_at*: data e hora em que ocorreu a baixa de estoque no VMpay, formato ISO 8601.
+  * *inventories*: array com os estoques a serem baixados, um elemento por *storable* (produto).
+
+    * *storable_id*: o id do produto.
+    * *balance_before*: o saldo do estoque logo *antes* da baixa.
 
 Retorno
 -------
