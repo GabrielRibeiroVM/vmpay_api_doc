@@ -31,7 +31,7 @@ Exemplo:
       "name": "Leite em pó",
       "unit": "gram",
       "external_id": null,
-      "url": "http://vmpay.vertitecnologia.com.br/api/v1/inputs/3044"
+      "url": "https://vmpay.vertitecnologia.com.br/api/v1/inputs/3044"
     },
     {
       "id": 3045,
@@ -46,7 +46,7 @@ Exemplo:
         "name": "Pacote 1kg",
         "quantity":1000
       },
-      "url": "http://vmpay.vertitecnologia.com.br/api/v1/inputs/3045"
+      "url": "https://vmpay.vertitecnologia.com.br/api/v1/inputs/3045"
     }
   ]
 
@@ -87,7 +87,7 @@ Exemplo:
     "name": "Leite em pó",
     "unit": "gram",
     "external_id": null,
-    "url": "http://vmpay.vertitecnologia.com.br/api/v1/inputs/3044"
+    "url": "https://vmpay.vertitecnologia.com.br/api/v1/inputs/3044"
   }
 
 Erros

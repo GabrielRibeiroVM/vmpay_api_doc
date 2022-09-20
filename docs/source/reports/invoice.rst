@@ -83,9 +83,9 @@ Retorno
 * **location**: o id e nome do local.
 * **machine**: o id e número de fábrica da máquina.
 * **danfe_url**: a url para baixar o danfe da nota fiscal.
-    * Caso a emissão da Nota Fiscal seja via SAT, para acessar a URL deve ser informado o "access_token": http://vmpay.vertitecnologia.com.br/api/v1/invoices/4/sat_data_pdf?access_token=837e068fbb4c1e1f
+    * Caso a emissão da Nota Fiscal seja via SAT, para acessar a URL deve ser informado o "access_token": https://vmpay.vertitecnologia.com.br/api/v1/invoices/4/sat_data_pdf?access_token=837e068fbb4c1e1f
 * **xml_url**: a url para baixar o xml da nota fiscal.
-    * Caso a emissão da Nota Fiscal seja via SAT, para acessar a URL deve ser informado o "access_token": http://vmpay.vertitecnologia.com.br/api/v1/invoices/4/sat_data?access_token=837e068fbb4c1e1f
+    * Caso a emissão da Nota Fiscal seja via SAT, para acessar a URL deve ser informado o "access_token": https://vmpay.vertitecnologia.com.br/api/v1/invoices/4/sat_data?access_token=837e068fbb4c1e1f
 * **routes**: array com detalhes das rotas da instalação da nota fiscal.
 * **items**: array com os itens da nota fiscal.
 * **payment**: informações sobre a forma de pagamento, se disponível.

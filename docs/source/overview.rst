@@ -7,7 +7,7 @@ Endpoints
 
 Os endpoints são mapeados como segue::
 
-    http://vmpay.vertitecnologia.com.br/api/v1/caminho/para/resource
+    https://vmpay.vertitecnologia.com.br/api/v1/caminho/para/resource
 
 Autenticação
 ============
@@ -17,7 +17,7 @@ requisições feitas à API.
 
 Exemplo::
 
-    http://vmpay.vertitecnologia.com.br/api/v1/caminho/para/api?access_token=837e068fbb4c1e1f
+    https://vmpay.vertitecnologia.com.br/api/v1/caminho/para/api?access_token=837e068fbb4c1e1f
 
 Paginação
 =========
@@ -41,7 +41,7 @@ Exemplo de requisição válida
 
 Essa requisição lista toda as categorias de um determinado operador::
 
-    GET http://vmpay.vertitecnologia.com.br/api/v1/categories?access_token=213qweasdzxc
+    GET https://vmpay.vertitecnologia.com.br/api/v1/categories?access_token=213qweasdzxc
 
 Códigos de retorno e seus significados
 ======================================

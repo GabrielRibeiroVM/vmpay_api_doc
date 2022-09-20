@@ -58,7 +58,7 @@ Segue um exemplo de retorno de consulta:
       "distribution_center_id": 1,
       "machine_id": 235,
       "pending": false,
-      "url": "http://vmpay.vertitecnologia.com.br/api/v1/machines/235/installations/363/pick_lists/2692",
+      "url": "https://vmpay.vertitecnologia.com.br/api/v1/machines/235/installations/363/pick_lists/2692",
       "notes": "some extra info"
     },
     {
@@ -71,7 +71,7 @@ Segue um exemplo de retorno de consulta:
       "distribution_center_id": 1,
       "machine_id": 643,
       "pending": false,
-      "url": "http://vmpay.vertitecnologia.com.br/api/v1/machines/643/installations/1170/pick_lists/5248",
+      "url": "https://vmpay.vertitecnologia.com.br/api/v1/machines/643/installations/1170/pick_lists/5248",
       "notes": null
     },
     {
@@ -84,7 +84,7 @@ Segue um exemplo de retorno de consulta:
       "distribution_center_id": 1,
       "machine_id": 643,
       "pending": false,
-      "url": "http://vmpay.vertitecnologia.com.br/api/v1/machines/643/installations/1170/pick_lists/5560",
+      "url": "https://vmpay.vertitecnologia.com.br/api/v1/machines/643/installations/1170/pick_lists/5560",
       "notes": null
     }
   ]

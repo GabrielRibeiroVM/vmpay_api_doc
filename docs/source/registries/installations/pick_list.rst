@@ -46,7 +46,7 @@ Exemplo::
       "distribution_center_id": 1,
       "machine_id": 49
       "pending": false,
-      "url": "http://vmpay.vertitecnologia.com.br/api/v1/machines/49/installations/857/pick_lists/4164",
+      "url": "https://vmpay.vertitecnologia.com.br/api/v1/machines/49/installations/857/pick_lists/4164",
       "notes": "some extra info"
     },
     {
@@ -59,7 +59,7 @@ Exemplo::
       "distribution_center_id": 1,
       "machine_id": 49
       "pending": false,
-      "url": "http://vmpay.vertitecnologia.com.br/api/v1/machines/49/installations/857/pick_lists/4302",
+      "url": "https://vmpay.vertitecnologia.com.br/api/v1/machines/49/installations/857/pick_lists/4302",
       "notes": null
     }
   ]
