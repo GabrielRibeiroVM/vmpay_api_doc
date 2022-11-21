@@ -74,10 +74,19 @@ campos:
 
   - **entered_vacant_amount**: saldo informado para o item no VMpay Visitor
 
+  - **manual_entered_amount**: valor informado na correção manual
+
+  - **vacant_amount_difference**: resultado do cálculo da diferença
+    
+    + **Positivo**: diferença resultou em quebra
+    + **Negativo**: diferença resultou em sobra
+    
   - **good_id**: o id do produto
 
   - **upc_code**: código do produto
 
+  - **desired_price**: valor do produto
+  
   - **returned_amounts**: lista de retornos do Visitor com os seguintes campos:
 
     + **id**: o id do registro
@@ -142,118 +151,80 @@ Exemplo:
 ::
 
   {
-    "id": 21013,
-    "scheduled_visit_id": 4744,
-    "created_at": "2016-12-21T07:56:05.000-02:00",
-    "updated_at": "2016-12-21T10:16:01.000-02:00",
+    "id": 68885,
+    "scheduled_visit_id": 11174,
+    "created_at": "2017-09-19T14:34:55.000Z",
+    "updated_at": "2017-09-19T14:43:47.000Z",
     "restock": true,
     "cash_collect": false,
     "only_visit": false,
     "finished": true,
-    "finished_at": "2016-12-21T16:39:20.000-02:00",
+    "finished_at": "2017-09-19T14:42:39.000Z",
     "reopened_at": null,
-    "installation_id": 1896,
-    "planogram_id": 11204,
-    "pick_list_id": 63089,
-    "synched_at": "2016-12-22T08:05:33.000-02:00",
-    "pending_inventory_adjustment": true,
-    "inventory_adjustment_id": null,
-    "scheduled_at": "2016-12-21T10:16:01.000-02:00",
-    "synched_by": "VMVISITOR - JOSÉ",
-    "edited_by": "Claudio da Silva",
+    "installation_id": 4956,
+    "planogram_id": 20618,
+    "pick_list_id": 175126,
+    "synched_at": "2017-09-19T14:42:39.000Z",
+    "pending_inventory_adjustment": false,
+    "inventory_adjustment_id": 90217,
+    "scheduled_at": "2017-09-19T14:35:00.000Z",
+    "synched_by": "Treinamento Fast",
+    "edited_by": "",
     "inventories": [
-      {
-        "planogram_item_id": 385102,
-        "capacity": 10.0,
-        "expected_vacant_amount": 6.0,
-        "entered_vacant_amount": 7.0,
-        "good_id": 522328,
-        "upc_code": "2847",
-        "returned_amounts": [
-          {
-            "id": 15197,
-            "original_value": 1.0,
-            "value": 2.0,
-            "edited": true,
-            "code": "relocated_machine_return",
-            "description": "Retorno Máquina Remanejada"
-          }
-        ]
-      },
-      {
-        "planogram_item_id": 385103,
-        "capacity": 10.0,
-        "expected_vacant_amount": 0.0,
-        "entered_vacant_amount": 0.0,
-        "good_id": 70679,
-        "upc_code": "1910",
-        "returned_amounts": []
-      },
-      {
-        "planogram_item_id": 385104,
-        "capacity": 13.0,
-        "expected_vacant_amount": 5.0,
-        "entered_vacant_amount": 2.0,
-        "good_id": 70688,
-        "returned_amounts": [
-          {
-            "id": 15196,
-            "original_value": 4.0,
-            "value": 8.0,
-            "edited": true,
-            "code": "item_not_shipped_return",
-            "description": "Retorno Item não enviado"
-          }
-        ]
-      },
-      {
-        "planogram_item_id": 385105,
-        "capacity": 10.0,
-        "expected_vacant_amount": 0.0,
-        "entered_vacant_amount": 8.0,
-        "good_id": 70678,
-        "returned_amounts": [
-          {
-            "id": 15194,
-            "original_value": 1.0,
-            "value": 2.0,
-            "edited": true,
-            "code": "incorrect_grid_return",
-            "description": "Retorno Grade Incorreta"
-          },
-          {
-            "id": 15195,
-            "original_value": 3.0,
-            "value": 6.0,
-            "edited": true,
-            "code": "product_inversion_return",
-            "description": "Retorno Inversão Produto"
-          }
-        ]
-      }
+        {
+            "planogram_item_id": 912759,
+            "capacity": 10.0,
+            "expected_vacant_amount": 2.0,
+            "entered_vacant_amount": 2.0,
+            "manual_entered_amount": 0,
+            "vacant_amount_difference": 0.0,
+            "good_id": 2,
+            "upc_code": "2",
+            "desired_price": 2.0,
+            "returned_amounts": []
+        },
+        {
+            "planogram_item_id": 912760,
+            "capacity": 10.0,
+            "expected_vacant_amount": 2.0,
+            "entered_vacant_amount": 2.0,
+            "manual_entered_amount": 0,
+            "vacant_amount_difference": -2.0,
+            "good_id": 1,
+            "upc_code": "1",
+            "desired_price": 2.0,
+            "returned_amounts": [
+                {
+                    "id": 15210,
+                    "original_value": null,
+                    "value": 2.0,
+                    "edited": false,
+                    "code": "expired_item_return",
+                    "description": "Retorno Vencido"
+                }
+            ]
+        },
+        {
+            "planogram_item_id": 912761,
+            "capacity": 10.0,
+            "expected_vacant_amount": 1.0,
+            "entered_vacant_amount": 1.0,
+            "manual_entered_amount": 0,
+            "vacant_amount_difference": -1.0,
+            "good_id": 1,
+            "upc_code": "1",
+            "desired_price": 2.0,
+            "returned_amounts": [
+                {
+                    "id": 15212,
+                    "original_value": null,
+                    "value": 1.0,
+                    "edited": false,
+                    "code": "damaged_item_return",
+                    "description": "Retorno Danificado"
+                }
+            ]
+        }
     ],
-    "custom_values": [
-      {
-        "field": {
-          "name": "limpeza",
-          "label": "Limpeza?",
-          "field_type": "boolean",
-          "required": true
-        },
-        "field_value": {
-          "value": true
-        }
-      },
-      {
-        "field": {
-          "name": "malote",
-          "label": "Malote",
-          "field_type": "string",
-          "required": true
-        },
-        "field_value": {
-          "value": "123"
-        }
-      }
-    ]
-  }
+    "custom_values": []
+}
