@@ -16,8 +16,6 @@ Os parâmetros abaixo podem ser passados como uma
 `query string <https://en.wikipedia.org/wiki/Query_string>`_. Mais de um filtro
 pode ser passado na mesma consulta.
 
-Este serviço suporta `paginação <../overview.html#paginacao>`_.
-
 * **include_deleted**: indica se deseja incluir no retorno os produtos excluídos. (true/false)
 
   * Se não for informado, será considerado false como padrão.
